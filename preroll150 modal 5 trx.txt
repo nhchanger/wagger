@@ -1,0 +1,19 @@
+chance=49.5
+multiplier=1.02
+base=0.00000100
+preroll=150
+prebet=0.00000001
+
+function dobet()
+chance =math.random (0.8,1)/100
+ if win then
+  nextbet=base
+ else
+  if currentstreak== -preroll then
+   nextbet=base
+  end
+  if currentstreak < -preroll then
+   nextbet=previousbet*multiplier
+  end
+ end
+end
