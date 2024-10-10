@@ -1,0 +1,41 @@
+--Kyo Watanabe
+--2023-06-11
+--Keno Sample Script
+
+range   = {25,12,23,14,3,4,7}
+risk    = "medium"
+game    = "keno"
+nextbet = 0.000011
+minbet  = 0.00025
+
+function generateRandomNumbers(count, min, max)
+  local numbers   = {}
+  local generated = {}
+  
+  while #numbers < count do
+    local randomValue = math.random(min, max)
+    
+    if not generated[randomValue] then
+      table.insert(numbers, randomValue)
+      generated[randomValue] = true
+    end
+  end
+  
+  return numbers
+end
+
+function dobet()
+    if (win) then
+        if (partialprofit > 0) then
+            resetpartialprofit()
+            nextbet = minbet
+        else
+            nextbet = previousbet * 0.75
+        end
+    else
+        nextbet = previousbet * 1.1
+    end
+    
+    range   = generateRandomNumbers(9, 1, 40)
+    nextbet = math.max(minbet, nextbet)
+end
