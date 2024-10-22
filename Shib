@@ -1,0 +1,37 @@
+basebet = 0.5 
+chance  = 0.1  
+chancef = 1 
+multi   = 6 
+nextbet = basebet  
+multif  = multi  
+profitc = 0  
+stopwin = false  
+function dobet()  
+    profitc += currentprofit  
+    if profitc > 0 then  
+        profitc = 0  
+        multi   = multif  
+        if stopwin then stop() end  
+    end  
+    if win then  
+        nextbet = basebet  
+        chance  = 0.1 
+        if currentstreak > 30 then  
+            chance = chancef    
+        end  
+    else  
+        if (currentstreak == -1 )then   
+            chance = chancef  
+        end  
+        nextbet = math.abs(profitc)/((99/chance)-1)*multi  
+        multi   = multi - 0.05   
+        if multi < 1 then   
+            multi = 1.01  
+        end   
+        chance  = chance+(chance*(3/100))  
+    end  
+    if currentstreak < -70 then stopwin = true end  
+    if nextbet < basebet then  
+        nextbet = basebet  
+    end  
+end
