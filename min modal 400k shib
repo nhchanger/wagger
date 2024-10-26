@@ -1,0 +1,46 @@
+target  = balance * 0.1
+minbet  = 0.51
+basebet = 0.51
+basech  = {80,90}
+huntch  = {5,15}
+
+nextbet = basebet
+chance  = basech[2]
+basic   = target/10000
+ls      = 0
+lc      = 0
+bcount  = 0
+
+function dobet()
+    if (profit >= target) then stop() end
+
+    if (win) then
+        ls      = 0
+        lc      = 0
+        chance  = math.random(basech[1], basech[2])
+        nextbet = basebet
+        
+        if (partialprofit > 0) then
+            resetpartialprofit()
+        end
+    else
+        ls = ls + 1
+        lc = lc + 1
+        
+        if (ls == 1) then
+            chance = math.random(huntch[1], huntch[2])
+            bcount = math.ceil((100 - 1 ) / chance)
+        end
+        
+        if (lc > bcount) then
+            lc     = 1
+            chance -= math.random(100,300)/1000
+            bcount = math.ceil((100 - 1) / chance)
+        end
+        
+        nextbet = math.abs(partialprofit+basic) / ((95/chance)-1)*1.1
+    end
+    
+    nextbet = math.max(minbet, nextbet)
+    if chance < 0.5 then chance = math.random(huntch[1], huntch[2]) end
+end
