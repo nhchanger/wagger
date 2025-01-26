@@ -38,7 +38,7 @@ function dobet()
     profitc = profit + currentprofit
     if profitc > 0 then
         if os.clock() > runtime then
-            print("+ " .. fix8(profit) .. "\t(" .. fix2(profit / (balance - profit) * 100) .. "%)")
+            --print("+ " .. fix8(profit) .. "\t(" .. fix2(profit / (balance - profit) * 100) .. "%)")
             stop()
             start()
         end
