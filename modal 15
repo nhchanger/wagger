@@ -1,0 +1,25 @@
+basebet = 1e-6
+basech  = 94
+ifwin   = 5
+iflose  = 25
+
+nextbet = basebet
+chance  = basech
+
+function dobet()
+    if (win) then
+        nextbet = previousbet * (1 + (ifwin / 100))
+        chance  = basech
+    else
+        nextbet = previousbet * (1 + (iflose / 100))
+        if (currentstreak == -1) then
+            chance = math.random(7,14)
+        end
+    end
+    
+    if (partialprofit > basebet) then
+        nextbet = basebet
+        chance  = basech
+        resetpartialprofit()
+    end
+end
