@@ -1,8 +1,8 @@
 modal    = balance
 target   = 2000     -- target utama
-target2  = modal * 0.001   -- target pertama
-tpsesi   = modal * 0.0001  -- target per sesi
-startbet = modal * 1e-7  -- bet awal
+target2  = modal * 0.1   -- target pertama
+tpsesi   = modal * 0.01  -- target per sesi
+startbet = modal * 1e-5  -- bet awal
 stoploss = balance * 0.5 -- setting stoploss
 pay1     = 900
 pay2     = 1100
